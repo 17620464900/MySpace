@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="container" id="login">
+    <form name="frmLogin" class="col-sm-offset-4 col-sm-4" role="form" ng-controller="HomeLoginController">
+        <input name="txtName" ng-model="name" type="text" class="form-control input-lg" placeholder="请输入用户名" required autofocus />
+        <input name="txtPwd" ng-model="pwd" type="password" class="form-control input-lg" placeholder="密码" required />
+        <button class="btn-lg btn-primary btn-block" ng-click="submit()">登录</button>
+         <div uib-alert ng-repeat="a in alerts"  type="a.type" ng-class="'alert-' + (a.type || 'warning')" close="closeAlert($index)">{{a.msg}}</div>
+
+     </form>
+<script src="./lib/sea/sea.js"></script>
+<script src="./js/seaConfig.js"></script>
+</body>
+
+</html>

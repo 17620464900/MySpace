@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/page/pagination.css">
+</head>
+<body>
+<!--
+<ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul>
+-->
+<div class="text">
+
+</div>
+<div class="M-box"></div>
+
+<script src="lib/page/jquery-1.9.1.js"></script>
+<script src="lib/md5/md5.js"></script>
+<!--<script src="lib/page/page.js"></script>-->
+<script src="lib/page/jquery.pagination.js"></script>
+<script>
+    $('.M-box').pagination({
+        pageCount:3,
+        jump:true,
+        coping:true,
+        homePage:'首页',
+        endPage:'末页',
+        prevContent:'上页',
+        nextContent:'下页',
+        totalData:4,
+        showData:1,
+        callback:function(api){
+            var data = {
+                page: api.getCurrent(),
+                name: 'mss',
+                say: 'oh'
+            };
+            $.getJSON('user.json',data,function(json){
+                var result= eval(json);
+                var html="";
+                var uq_age="";
+                var salt = Math.random(1,50);
+                for(var i=0;i<result.pepole.length;i++){
+
+                    var uq_age=hex_md5(result.pepole[i].age);
+                    html+="<ul>";
+                    html+="<li>"+result.pepole[i].name+"</li>";
+                    html+="<li>"+uq_age+"</li>";
+                    html+="<li>"+result.pepole[i].email+"</li>";
+                    html+="</ul>";
+                }
+                $('.text').html(html);
+                console.log(result.pepole);
+            });
+        }
+    },function(api){
+        $('.now').text(api.getCurrent());
+    });
+
+</script>
+</body>
+</html>
